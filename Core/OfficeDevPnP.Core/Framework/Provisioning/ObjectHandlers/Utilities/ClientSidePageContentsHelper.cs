@@ -12,7 +12,7 @@ using System.Web;
 
 namespace OfficeDevPnP.Core.Framework.Provisioning.ObjectHandlers.Utilities
 {
-#if !ONPREMISES
+#if !ONPREMISES || SP2019
     /// <summary>
     /// Helper class holding public methods that used by the client side page object handler. The purpose is to be able to reuse these public methods in a extensibility provider
     /// </summary>
@@ -76,6 +76,7 @@ namespace OfficeDevPnP.Core.Framework.Provisioning.ObjectHandlers.Utilities
                             TranslateX = pageToExtract.PageHeader.TranslateX,
                             TranslateY = pageToExtract.PageHeader.TranslateY,
                             LayoutType = (ClientSidePageHeaderLayoutType)Enum.Parse(typeof(Pages.ClientSidePageHeaderLayoutType), pageToExtract.PageHeader.LayoutType.ToString()),
+#if !ONPREMISES
                             TextAlignment = (ClientSidePageHeaderTextAlignment)Enum.Parse(typeof(Pages.ClientSidePageHeaderTitleAlignment), pageToExtract.PageHeader.TextAlignment.ToString()),
                             ShowTopicHeader = pageToExtract.PageHeader.ShowTopicHeader,
                             ShowPublishDate = pageToExtract.PageHeader.ShowPublishDate,
@@ -84,6 +85,7 @@ namespace OfficeDevPnP.Core.Framework.Provisioning.ObjectHandlers.Utilities
                             Authors = pageToExtract.PageHeader.Authors,
                             AuthorByLine = pageToExtract.PageHeader.AuthorByLine,
                             AuthorByLineId = pageToExtract.PageHeader.AuthorByLineId,
+#endif
                         };
                         extractedPageInstance.Header = extractedHeader;
                     }

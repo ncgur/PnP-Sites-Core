@@ -14,7 +14,7 @@ using OfficeDevPnP.Core.Framework.Provisioning.ObjectHandlers.Utilities;
 
 namespace OfficeDevPnP.Core.Framework.Provisioning.ObjectHandlers
 {
-#if !ONPREMISES
+#if !ONPREMISES || SP2019
     internal class ObjectClientSidePages : ObjectHandlerBase
     {
         private const string ContentTypeIdField = "ContentTypeId";
@@ -213,8 +213,9 @@ namespace OfficeDevPnP.Core.Framework.Provisioning.ObjectHandlers
                                         page.SetCustomPageHeader(serverRelativeImageUrl);
                                     }
 
-                                    page.PageHeader.TextAlignment = (Pages.ClientSidePageHeaderTitleAlignment)Enum.Parse(typeof(ClientSidePageHeaderTextAlignment), clientSidePage.Header.TextAlignment.ToString());
                                     page.PageHeader.LayoutType = (Pages.ClientSidePageHeaderLayoutType)Enum.Parse(typeof(ClientSidePageHeaderLayoutType), clientSidePage.Header.LayoutType.ToString());
+#if !ONPREMISES
+                                    page.PageHeader.TextAlignment = (Pages.ClientSidePageHeaderTitleAlignment)Enum.Parse(typeof(ClientSidePageHeaderTextAlignment), clientSidePage.Header.TextAlignment.ToString());
                                     page.PageHeader.ShowTopicHeader = clientSidePage.Header.ShowTopicHeader;
                                     page.PageHeader.ShowPublishDate = clientSidePage.Header.ShowPublishDate;
                                     page.PageHeader.TopicHeader = clientSidePage.Header.TopicHeader;
@@ -222,6 +223,7 @@ namespace OfficeDevPnP.Core.Framework.Provisioning.ObjectHandlers
                                     page.PageHeader.Authors = clientSidePage.Header.Authors;
                                     page.PageHeader.AuthorByLine = clientSidePage.Header.AuthorByLine;
                                     page.PageHeader.AuthorByLineId = clientSidePage.Header.AuthorByLineId;
+#endif
                                     break;
                                 }
                         }
@@ -561,7 +563,11 @@ namespace OfficeDevPnP.Core.Framework.Provisioning.ObjectHandlers
                         ListItemUtilities.UpdateListItem(page.PageListItem, parser, clientSidePage.FieldValues, ListItemUtilities.ListItemUpdateType.UpdateOverwriteVersion);
                     }
 
+#if SP2019
+                    if (true)
+#else
                     if (page.LayoutType != Pages.ClientSidePageLayoutType.SingleWebPartAppPage)
+#endif
                     {
                         // Set commenting, ignore on pages of the type Home or page templates
                         if (page.LayoutType != Pages.ClientSidePageLayoutType.Home && !clientSidePage.PromoteAsTemplate)

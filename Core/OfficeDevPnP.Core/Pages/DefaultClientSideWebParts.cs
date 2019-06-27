@@ -14,7 +14,7 @@
         /// Content Rollup webpart
         /// </summary>
         ContentRollup,
-#if !ONPREMISES
+#if !ONPREMISES || SP2019
         /// <summary>
         /// Bing Map webpart
         /// </summary>
@@ -48,7 +48,7 @@
         /// News Reel webpart
         /// </summary>
         NewsReel,
-#if !ONPREMISES
+#if !ONPREMISES || SP2019
         /// <summary>
         /// PowerBI Report Embed webpart
         /// </summary>
@@ -74,7 +74,7 @@
         /// Events webpart
         /// </summary>
         Events,
-#if !ONPREMISES
+#if !ONPREMISES || SP2019
         /// <summary>
         /// Group Calendar webpart
         /// </summary>
@@ -108,7 +108,7 @@
         /// Divider web part
         /// </summary>
         Divider,
-#if !ONPREMISES
+#if !ONPREMISES || SP2019
         /// <summary>
         /// Microsoft Forms web part
         /// </summary>
@@ -118,7 +118,7 @@
         /// Spacer web part
         /// </summary>
         Spacer,
-#if !ONPREMISES
+#if !ONPREMISES || SP2019
         /// <summary>
         /// Web part to host SharePoint Add-In parts
         /// </summary>
